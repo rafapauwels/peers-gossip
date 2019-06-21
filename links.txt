@@ -1,3 +1,0 @@
-https://www.sitepoint.com/implement-javas-equals-method-correctly/
-https://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
-https://www.boraji.com/jackson-api-converting-pojos-to-json-example
