@@ -1,0 +1,7 @@
+.vscode
+target/
+.classpath
+.project
+links.txt
+.git
+.settings
