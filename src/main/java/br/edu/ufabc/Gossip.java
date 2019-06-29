@@ -18,6 +18,8 @@ import br.edu.ufabc.controllers.Peers;
 import br.edu.ufabc.controllers.TimeController;
 import br.edu.ufabc.models.Metadados;
 
+import static br.edu.ufabc.App.servico;;
+
 public class Gossip extends Thread {
   private boolean self;
   private long waitTime;
@@ -27,7 +29,7 @@ public class Gossip extends Thread {
   }
 
   public Gossip(String cliente) {
-    if (cliente.equals(App.name)) {
+    if (cliente.equals(servico.getNome())) {
       setSelf(true);
     } else {
       setSelf(false);
@@ -47,7 +49,7 @@ public class Gossip extends Thread {
         Map<String, Metadados> dados;
 
         if (self) {
-          dados = Memoria.getMeta(App.name);
+          dados = Memoria.getMeta(servico.getNome());
         } else {
           dados = Memoria.getMeta(selectedTargetPeer);
         }

@@ -13,6 +13,8 @@ import br.edu.ufabc.controllers.TimeController;
 import br.edu.ufabc.models.Metadado;
 import br.edu.ufabc.models.Metadados;
 
+import static br.edu.ufabc.App.servico;
+
 public class FileScanner extends Thread {
 
   public String dir;
@@ -36,7 +38,6 @@ public class FileScanner extends Thread {
           Metadados metadados = new Metadados();
           List<Metadado> listaMeta = new ArrayList<Metadado>();
           
-
           for (File arquivo : arquivos) {
             Metadado meta = new Metadado();
             BasicFileAttributes atributos = Files.readAttributes(Paths.get(arquivo.getPath()), BasicFileAttributes.class);
@@ -51,7 +52,7 @@ public class FileScanner extends Thread {
           }
 
           metadados.setMetadados(listaMeta);
-          Memoria.adiciona(App.name, metadados);
+          Memoria.adiciona(servico.getNome(), metadados);
 
           Thread.sleep(TimeController.T1);
         }

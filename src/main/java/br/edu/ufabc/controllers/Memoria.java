@@ -7,6 +7,8 @@ import java.util.Random;
 import br.edu.ufabc.App;
 import br.edu.ufabc.models.Metadados;
 
+import static br.edu.ufabc.App.servico;
+
 public class Memoria {
 
   private static Map<String, Metadados> memoria = new HashMap<String, Metadados>();
@@ -28,7 +30,7 @@ public class Memoria {
   public static Map<String, Metadados> getMeta(String cliente) {
     Map<String, Metadados> retorno = new HashMap<String, Metadados>();
 
-    if (cliente.equals(App.name)) {
+    if (cliente.equals(servico.getNome())) {
       retorno.put(cliente, memoria.get(cliente));
       return retorno;
     }
