@@ -1,24 +1,26 @@
-package br.edu.ufabc.controllers;
+package br.edu.ufabc.gossip.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import br.edu.ufabc.App;
-import static br.edu.ufabc.App.servico;;
+import br.edu.ufabc.gossip.App;
+import br.edu.ufabc.gossip.Auxiliar;
+import br.edu.ufabc.gossip.models.Peer;
+
+import static br.edu.ufabc.gossip.App.me;;
 
 public class Peers {
   private static Map<String, String> peers = new HashMap<String, String>();
 
   public static void setup() {
     Discovery.register();
-    // TODO query discovery with ?servico=name to get the others
-    peers.put("Q", "localhost:9090");
-    peers.put("W", "localhost:9091");
-    peers.put("E", "localhost:9092");
-    peers.put("R", "localhost:9093");
-    peers.put("T", "localhost:9094");
-    peers.remove(servico.getNome());
+
+    for (Peer vizinho : Discovery.getPeers()) {
+      peers.put(vizinho.getNome(), vizinho.getEndereco());    
+    }
+    
+    peers.remove(me.getNome());
   }
 
   public static String select() {

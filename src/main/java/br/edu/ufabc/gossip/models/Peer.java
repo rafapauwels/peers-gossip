@@ -1,4 +1,4 @@
-package br.edu.ufabc.models;
+package br.edu.ufabc.gossip.models;
 
 public class Peer {
     private String nome;

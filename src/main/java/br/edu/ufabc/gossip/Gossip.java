@@ -1,4 +1,4 @@
-package br.edu.ufabc;
+package br.edu.ufabc.gossip;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.edu.ufabc.controllers.Memoria;
-import br.edu.ufabc.controllers.Peers;
-import br.edu.ufabc.controllers.TimeController;
-import br.edu.ufabc.models.Metadados;
+import br.edu.ufabc.gossip.controllers.Memoria;
+import br.edu.ufabc.gossip.controllers.Peers;
+import br.edu.ufabc.gossip.controllers.TimeController;
+import br.edu.ufabc.gossip.models.Metadados;
 
-import static br.edu.ufabc.App.servico;;
+import static br.edu.ufabc.gossip.App.me;;
 
 public class Gossip extends Thread {
   private boolean self;
@@ -29,7 +29,7 @@ public class Gossip extends Thread {
   }
 
   public Gossip(String cliente) {
-    if (cliente.equals(servico.getNome())) {
+    if (cliente.equals(me.getNome())) {
       setSelf(true);
     } else {
       setSelf(false);
@@ -49,7 +49,7 @@ public class Gossip extends Thread {
         Map<String, Metadados> dados;
 
         if (self) {
-          dados = Memoria.getMeta(servico.getNome());
+          dados = Memoria.getMeta(me.getNome());
         } else {
           dados = Memoria.getMeta(selectedTargetPeer);
         }

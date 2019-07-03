@@ -1,4 +1,4 @@
-package br.edu.ufabc.models;
+package br.edu.ufabc.gossip.models;
 
 import java.nio.file.attribute.FileTime;
 

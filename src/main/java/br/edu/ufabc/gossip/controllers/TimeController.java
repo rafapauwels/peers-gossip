@@ -1,4 +1,4 @@
-package br.edu.ufabc.controllers;
+package br.edu.ufabc.gossip.controllers;
 
 public class TimeController {
   

@@ -80,7 +80,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>br.edu.ufabc.App</mainClass>
+                <mainClass>br.edu.ufabc.gossip.App</mainClass>
               </manifest>
             </archive>
           </configuration>
