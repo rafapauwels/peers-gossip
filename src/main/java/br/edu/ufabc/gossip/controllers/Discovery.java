@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.edu.ufabc.gossip.models.Peer;
 
 import static br.edu.ufabc.gossip.App.me;
+import static br.edu.ufabc.gossip.Auxiliar.*;
 
 public class Discovery {
 
@@ -33,7 +34,7 @@ public class Discovery {
             con.getOutputStream().write(me.toString().getBytes("UTF8"));
 
             if (con.getResponseCode() == 200) {
-                System.out.println("Serviço " + me.getNome() + " registrado");
+                System.out.println(ANSI_CYAN + "DISCOVERY" + ANSI_RESET + " - Serviço " + me.getNome() + " registrado");
             } else {
                 System.out.println("Falha de comunicação com o serviço registrador");
             }

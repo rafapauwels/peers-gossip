@@ -15,17 +15,29 @@ public class Peers {
 
   public static void setup() {
     Discovery.register();
-
+    updatePeers();
+  }
+  
+  public static void updatePeers() {
     for (Peer vizinho : Discovery.getPeers()) {
       peers.put(vizinho.getNome(), vizinho.getEndereco());    
     }
     
-    peers.remove(me.getNome());
+   peers.remove(me.getNome());
   }
 
-  public static String select() {
-    Integer index = new Random().nextInt(peers.size());
-    return (String) peers.values().toArray()[index];
+  public static Map<String, String> select() {
+    Map<String, String> retorno = new HashMap<String, String>();
+    if (peers.size() > 0) {
+      int index = new Random().nextInt(peers.size());
+      String id = (String) peers.keySet().toArray()[index];
+      String address = (String) peers.get(id);
+      retorno.put("id", id);
+      retorno.put("address", address);
+      return retorno;
+    } else {
+      return null;
+    }
   }
 
   public static String getPeerAddress(String cliente) {

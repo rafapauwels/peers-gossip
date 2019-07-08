@@ -1,10 +1,8 @@
 package br.edu.ufabc.gossip;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import br.edu.ufabc.gossip.controllers.Discovery;
+import br.edu.ufabc.gossip.controllers.Gossip;
+import br.edu.ufabc.gossip.controllers.GossipReceiver;
 import br.edu.ufabc.gossip.controllers.Peers;
 import br.edu.ufabc.gossip.models.Peer;
 
@@ -24,22 +22,25 @@ public class App {
     }
 
     if (LOCAL) {
-      me.setNome("Localhost");
+      me.setNome("localhost");
       me.setEndereco("http://localhost");
     } else {
       me.setNome(Discovery.getInstanceId());
       me.setEndereco(Discovery.getHostIp());
     }
-
     FileScanner fs = new FileScanner(args[0]);
-    
     Peers.setup();
-    fs.start();
 
     Gossip selfGossip = new Gossip(me.getNome());
     Gossip gossip = new Gossip();
+    GossipReceiver gossipReceiver = new GossipReceiver();
+    // GarbageGossip gc = new GarbageGossip();
+
     
-    // selfGossip.start();
+    fs.start();
+    gossipReceiver.start();
+    selfGossip.start();
     // gossip.start();
+    // gc.start();
   }
 }

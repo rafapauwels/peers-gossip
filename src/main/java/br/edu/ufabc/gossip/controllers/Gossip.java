@@ -1,24 +1,19 @@
-package br.edu.ufabc.gossip;
+package br.edu.ufabc.gossip.controllers;
+
+import static br.edu.ufabc.gossip.App.me;
+import static br.edu.ufabc.gossip.Auxiliar.*;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.edu.ufabc.gossip.controllers.Memoria;
-import br.edu.ufabc.gossip.controllers.Peers;
-import br.edu.ufabc.gossip.controllers.TimeController;
 import br.edu.ufabc.gossip.models.Metadados;
-
-import static br.edu.ufabc.gossip.App.me;;
 
 public class Gossip extends Thread {
   private boolean self;
@@ -36,7 +31,7 @@ public class Gossip extends Thread {
     }
   }
 
-  public void setSelf(boolean self) {
+  private void setSelf(boolean self) {
     this.waitTime = self ? TimeController.T2 : TimeController.T3;
     this.self = self;
   }
@@ -45,17 +40,20 @@ public class Gossip extends Thread {
   public void run() {
     try {
       while (true) {
-        String selectedTargetPeer = Peers.select();
-        Map<String, Metadados> dados;
+        Peers.updatePeers();
+        Map<String, String> selectedTargetPeer = Peers.select();
+        if (selectedTargetPeer != null) {
+          Map<String, Metadados> dados;
 
-        if (self) {
-          dados = Memoria.getMeta(me.getNome());
-        } else {
-          dados = Memoria.getMeta(selectedTargetPeer);
-        }
+          if (self) {
+            dados = Memoria.getMeta(me.getNome());
+          } else {
+            dados = Memoria.getMeta(selectedTargetPeer.get("id"));
+          }
 
-        if (!dados.values().contains(null)) {
-          sendData(selectedTargetPeer, dados);
+          if (!dados.values().contains(null)) {
+            sendData(selectedTargetPeer.get("id"), selectedTargetPeer.get("address"), dados);
+          }
         }
 
         Thread.sleep(waitTime);
@@ -65,19 +63,18 @@ public class Gossip extends Thread {
     }
   }
 
-  private void sendData(String target, Map<String, Metadados> data) throws IOException {
+  private void sendData(String targetName, String target, Map<String, Metadados> data) throws IOException {
     ObjectMapper mapper = new ObjectMapper().setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
     String json = mapper.writeValueAsString(data);
-    
-    InetAddress ip = InetAddress.getByName(target.split(":")[0]);
-    int porta = Integer.parseInt(target.split(":")[1]);
 
-    System.out.println("Enviando " + data.keySet() + " para " + target); 
-    
+    InetAddress ip = InetAddress.getByName(target);
+    int porta = 49152;
+
+    System.out.println((self?ANSI_WHITE+"SELF":ANSI_PURPLE) + "GOSSIP" + ANSI_RESET + " - Enviando metadados de " + data.keySet() + " para " + targetName + "(" + target + ")");
+
     DatagramPacket datagramPacket = new DatagramPacket(json.getBytes(), json.getBytes().length, ip, porta);
     DatagramSocket socket = new DatagramSocket();
     socket.send(datagramPacket);
     socket.close();
-    //TODO
-  }
+  } 
 }
