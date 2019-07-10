@@ -1,8 +1,6 @@
 package br.edu.ufabc.gossip.controllers;
 
-import static br.edu.ufabc.gossip.Auxiliar.ANSI_PURPLE;
-import static br.edu.ufabc.gossip.Auxiliar.ANSI_RED;
-import static br.edu.ufabc.gossip.Auxiliar.ANSI_RESET;
+import static br.edu.ufabc.gossip.Auxiliar.*;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -26,7 +24,7 @@ public class GossipReceiver extends Thread {
       this.dadosRecebidos = new byte[1024];
       this.serverSocket = new DatagramSocket(49152);
     } catch (Exception e) {
-      System.out.println(ANSI_PURPLE + "GOSSIP" + ANSI_RESET + " - Falha ao bindar a porta, esse peer não está apto a receber dados");
+      System.out.println(ANSI_YELLOW + "GOSSIP RECEIVER" + ANSI_RESET + " - Falha ao bindar a porta, esse peer não está apto a receber dados");
       this.serverSocket = null;
     }
   }
@@ -41,7 +39,8 @@ public class GossipReceiver extends Thread {
       try {
         serverSocket.receive(pacote);
         payload = new ObjectMapper().readValue(new String(pacote.getData()), new TypeReference<Map<String, Metadados>>() {});
-        System.out.println(payload);
+        System.out.println(ANSI_YELLOW + "GOSSIP RECEIVER" + ANSI_RESET + " - Recebido dados de " + payload.keySet());        
+        Memoria.adiciona(payload.keySet().toArray()[0].toString(), (Metadados) payload.values().toArray()[0]);
       } catch (IOException e) {
         e.printStackTrace();
       }

@@ -1,5 +1,21 @@
 #!/bin/bash
 mvn clean install
-scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@ec2-18-221-5-112.us-east-2.compute.amazonaws.com:~/
-scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@ec2-18-220-90-71.us-east-2.compute.amazonaws.com:~/
 
+# PEERS
+PRIMEIRO="ec2-3-17-64-159.us-east-2.compute.amazonaws.com"
+SEGUNDO="ec2-3-14-251-95.us-east-2.compute.amazonaws.com"
+TERCEIRO="ec2-18-222-30-99.us-east-2.compute.amazonaws.com"
+QUARTO="ec2-3-17-203-198.us-east-2.compute.amazonaws.com"
+QUINTO="ec2-3-14-135-56.us-east-2.compute.amazonaws.com"
+
+scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@$PRIMEIRO:~/
+scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@$SEGUNDO:~/
+scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@$TERCEIRO:~/
+scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@$QUARTO:~/
+scp -i ~/development/pauwelsarch.pem target/peers-1.0-SNAPSHOT-jar-with-dependencies.jar ubuntu@$QUINTO:~/
+
+deepin-terminal -e ssh -i ~/development/pauwelsarch.pem ubuntu@$PRIMEIRO &
+deepin-terminal -e ssh -i ~/development/pauwelsarch.pem ubuntu@$SEGUNDO &
+deepin-terminal -e ssh -i ~/development/pauwelsarch.pem ubuntu@$TERCEIRO &
+deepin-terminal -e ssh -i ~/development/pauwelsarch.pem ubuntu@$QUARTO &
+deepin-terminal -e ssh -i ~/development/pauwelsarch.pem ubuntu@$QUINTO &

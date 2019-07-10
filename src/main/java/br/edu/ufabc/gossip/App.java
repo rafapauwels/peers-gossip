@@ -1,8 +1,10 @@
 package br.edu.ufabc.gossip;
 
 import br.edu.ufabc.gossip.controllers.Discovery;
+import br.edu.ufabc.gossip.controllers.GarbageGossip;
 import br.edu.ufabc.gossip.controllers.Gossip;
 import br.edu.ufabc.gossip.controllers.GossipReceiver;
+import br.edu.ufabc.gossip.controllers.Memoria;
 import br.edu.ufabc.gossip.controllers.Peers;
 import br.edu.ufabc.gossip.models.Peer;
 
@@ -28,19 +30,20 @@ public class App {
       me.setNome(Discovery.getInstanceId());
       me.setEndereco(Discovery.getHostIp());
     }
+
     FileScanner fs = new FileScanner(args[0]);
     Peers.setup();
 
     Gossip selfGossip = new Gossip(me.getNome());
     Gossip gossip = new Gossip();
     GossipReceiver gossipReceiver = new GossipReceiver();
-    // GarbageGossip gc = new GarbageGossip();
+    GarbageGossip gc = new GarbageGossip();
 
     
     fs.start();
     gossipReceiver.start();
     selfGossip.start();
-    // gossip.start();
-    // gc.start();
+    gossip.start();
+    gc.start();
   }
 }

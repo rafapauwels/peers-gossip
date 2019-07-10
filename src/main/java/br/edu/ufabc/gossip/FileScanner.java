@@ -23,6 +23,7 @@ public class FileScanner extends Thread {
 
   private String dir;
   private Metadados metadados;
+
   public FileScanner(String dir) {
     this.dir = dir;
     this.metadados = new Metadados();
@@ -46,9 +47,9 @@ public class FileScanner extends Thread {
 
             meta.setNome(arquivo.getName());
             meta.setTamanho(atributos.size());
-            meta.setAcessadoEm(atributos.lastAccessTime());
-            meta.setCriadoEm(atributos.creationTime());
-            meta.setModificadoEm(atributos.lastModifiedTime());
+            meta.setAcessadoEm(filetimeToString(atributos.lastAccessTime()));
+            meta.setCriadoEm(filetimeToString(atributos.creationTime()));
+            meta.setModificadoEm(filetimeToString(atributos.lastModifiedTime()));
 
             listaMeta.add(meta);
           }

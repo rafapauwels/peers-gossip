@@ -23,7 +23,7 @@ public class Peers {
       peers.put(vizinho.getNome(), vizinho.getEndereco());    
     }
     
-   peers.remove(me.getNome());
+    peers.remove(me.getNome());
   }
 
   public static Map<String, String> select() {

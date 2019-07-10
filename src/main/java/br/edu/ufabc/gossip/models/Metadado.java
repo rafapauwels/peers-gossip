@@ -2,6 +2,8 @@ package br.edu.ufabc.gossip.models;
 
 import java.nio.file.attribute.FileTime;
 
+import br.edu.ufabc.gossip.Auxiliar;
+
 public class Metadado {
   private String nome;
   private long tamanho;
@@ -28,27 +30,27 @@ public class Metadado {
     this.tamanho = tamanho;
   }
 
-  public FileTime getCriadoEm() {
-    return this.criadoEm;
+  public String getCriadoEm() {
+    return Auxiliar.filetimeToString(this.criadoEm);
   }
 
-  public void setCriadoEm(FileTime criadoEm) {
-    this.criadoEm = criadoEm;
+  public void setCriadoEm(String criadoEm) {
+    this.criadoEm = Auxiliar.stringTofiletime(criadoEm);
   }
 
-  public FileTime getAcessadoEm() {
-    return this.acessadoEm;
+  public String getAcessadoEm() {
+    return Auxiliar.filetimeToString(this.acessadoEm);
   }
 
-  public void setAcessadoEm(FileTime acessadoEm) {
-    this.acessadoEm = acessadoEm;
+  public void setAcessadoEm(String acessadoEm) {
+    this.acessadoEm = Auxiliar.stringTofiletime(acessadoEm);
   }
 
-  public FileTime getModificadoEm() {
-    return this.modificadoEm;
+  public String getModificadoEm() {
+    return Auxiliar.filetimeToString(this.modificadoEm);
   }
 
-  public void setModificadoEm(FileTime modificadoEm) {
-    this.modificadoEm = modificadoEm;
+  public void setModificadoEm(String modificadoEm) {
+    this.modificadoEm = Auxiliar.stringTofiletime(modificadoEm);
   }
 }

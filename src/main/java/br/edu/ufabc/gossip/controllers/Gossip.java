@@ -44,7 +44,7 @@ public class Gossip extends Thread {
         Map<String, String> selectedTargetPeer = Peers.select();
         if (selectedTargetPeer != null) {
           Map<String, Metadados> dados;
-
+          
           if (self) {
             dados = Memoria.getMeta(me.getNome());
           } else {
