@@ -1,13 +1,16 @@
 package br.edu.ufabc.gossip;
 
+import static br.edu.ufabc.gossip.App.me;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_GREEN;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_RESET;
+import static br.edu.ufabc.gossip.Auxiliar.filetimeToString;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,9 +18,6 @@ import br.edu.ufabc.gossip.controllers.Memoria;
 import br.edu.ufabc.gossip.controllers.TimeController;
 import br.edu.ufabc.gossip.models.Metadado;
 import br.edu.ufabc.gossip.models.Metadados;
-
-import static br.edu.ufabc.gossip.App.me;
-import static br.edu.ufabc.gossip.Auxiliar.*;
 
 public class FileScanner extends Thread {
 

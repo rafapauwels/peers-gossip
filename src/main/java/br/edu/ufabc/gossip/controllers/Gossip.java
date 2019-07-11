@@ -71,7 +71,6 @@ public class Gossip extends Thread {
     int porta = 49152;
 
     System.out.println((self?ANSI_WHITE+"SELF":ANSI_PURPLE) + "GOSSIP" + ANSI_RESET + " - Enviando metadados de " + data.keySet() + " para " + targetName + "(" + target + ")");
-
     DatagramPacket datagramPacket = new DatagramPacket(json.getBytes(), json.getBytes().length, ip, porta);
     DatagramSocket socket = new DatagramSocket();
     socket.send(datagramPacket);

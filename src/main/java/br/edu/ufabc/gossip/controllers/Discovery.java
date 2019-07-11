@@ -1,20 +1,18 @@
 package br.edu.ufabc.gossip.controllers;
 
+import static br.edu.ufabc.gossip.App.me;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_CYAN;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_RESET;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.edu.ufabc.gossip.models.Peer;
-
-import static br.edu.ufabc.gossip.App.me;
-import static br.edu.ufabc.gossip.Auxiliar.*;
 
 public class Discovery {
 

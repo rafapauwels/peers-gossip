@@ -4,7 +4,6 @@ import br.edu.ufabc.gossip.controllers.Discovery;
 import br.edu.ufabc.gossip.controllers.GarbageGossip;
 import br.edu.ufabc.gossip.controllers.Gossip;
 import br.edu.ufabc.gossip.controllers.GossipReceiver;
-import br.edu.ufabc.gossip.controllers.Memoria;
 import br.edu.ufabc.gossip.controllers.Peers;
 import br.edu.ufabc.gossip.models.Peer;
 

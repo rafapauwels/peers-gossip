@@ -1,14 +1,12 @@
 package br.edu.ufabc.gossip.controllers;
 
+import static br.edu.ufabc.gossip.App.me;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import br.edu.ufabc.gossip.App;
-import br.edu.ufabc.gossip.Auxiliar;
-import br.edu.ufabc.gossip.models.Peer;
-
-import static br.edu.ufabc.gossip.App.me;;
+import br.edu.ufabc.gossip.models.Peer;;
 
 public class Peers {
   private static Map<String, String> peers = new HashMap<String, String>();

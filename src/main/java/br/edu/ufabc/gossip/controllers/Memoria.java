@@ -1,14 +1,14 @@
 package br.edu.ufabc.gossip.controllers;
 
+import static br.edu.ufabc.gossip.App.me;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_RED;
+import static br.edu.ufabc.gossip.Auxiliar.ANSI_RESET;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import br.edu.ufabc.gossip.App;
 import br.edu.ufabc.gossip.models.Metadados;
-
-import static br.edu.ufabc.gossip.App.me;
-import static br.edu.ufabc.gossip.Auxiliar.*;
 
 public class Memoria {
 
